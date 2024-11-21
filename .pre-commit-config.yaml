@@ -1,0 +1,49 @@
+repos:
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.76.0
+  hooks:
+    - id: terraform_fmt
+      args:
+        - --args=-no-color
+        - --args=-diff
+        - --args=-write=true
+    - id: terraform_tflint
+      args:
+        - '--args=--config=__GIT_WORKING_DIR__/.tflint.hcl'
+        - '--args=--disable-rule=terraform_comment_syntax'
+        - '--args=--disable-rule=terraform_deprecated_index'
+        - '--args=--disable-rule=terraform_deprecated_interpolation'
+        - '--args=--disable-rule=terraform_documented_outputs'
+        - '--args=--disable-rule=terraform_documented_variables'
+        - '--args=--disable-rule=terraform_module_pinned_source'
+        - '--args=--disable-rule=terraform_naming_convention'
+        - '--args=--disable-rule=terraform_required_providers'
+        - '--args=--disable-rule=terraform_required_version'
+        - '--args=--disable-rule=terraform_standard_module_structure'
+        - '--args=--disable-rule=terraform_typed_variables'
+        - '--args=--disable-rule=terraform_unused_declarations'
+        - '--args=--disable-rule=terraform_workspace_remote'
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.3.0
+  hooks:
+    # Git style
+    - id: check-added-large-files
+    - id: check-merge-conflict
+    - id: no-commit-to-branch
+    # Common errors
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+      args: [--markdown-linebreak-ext=md]
+      verbose: false
+    - id: check-yaml
+      args: [--allow-multiple-documents]
+    - id: check-executables-have-shebangs
+    # Cross platform
+    - id: check-case-conflict
+    - id: mixed-line-ending
+      args: [--fix=lf]
+      verbose: false
+    # Security
+    - id: detect-aws-credentials
+      args: ['--allow-missing-credentials']
+    - id: detect-private-key

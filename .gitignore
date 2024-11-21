@@ -1,0 +1,13 @@
+.DS_Store
+.terraform/
+*.tfvars
+*.tfstate
+*_override.tf
+*.bak*
+*.zip
+
+# direnv
+.env
+.direnv/
+.envrc.*
+!.envrc.*.vars
